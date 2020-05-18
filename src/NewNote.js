@@ -1,70 +1,62 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Moment from 'moment';
+import './NewNote.css'
 
 class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // title : "",
-            // content : "",
+            title: "Title",
+            description: "Description",
+            content: "Note"
         };
 
         this.handleClick = this.handleClick.bind(this);
     }
 
-    makeCard() {
-        return(
-            <Card>
-                 <CardContent>
-                     <p>document.getElementById('noteTitle').value</p>
-                     <p>document.getElementById('noteContent').value</p>
-                </CardContent>
-             </Card>
-        )
-    }
-
     handleClick() {
-        // const c = {
-        //     title: document.getElementById('noteTitle').value,
-        //     content: document.getElementById('noteContent').value,
-        // }
-        super.addNote(this.makeCard())
-        console.log("done")
+        const c = {
+            title: this.state.title,
+            description: this.state.description,
+            content: this.state.content,
+            time: Moment().calendar(),
+            key: Date.now()
+        }
+        this.props.addNote(c)
+        this.setState({ title : "Title", content : "Note", description : "Description" })
     }
 
     render() {
         return(
-            <form>
-                <input
-                    id= "noteTitle"
-                    type = "text"
-                    onChange={e => this.setState({ title: e.target.value })}
-                />
+            <div className="NewNote">
+                <div className="heading">
+                    <input
+                        className="title"
+                        id= "noteTitle"
+                        type = "text"
+                        value = {this.state.title}
+                        onChange={e => this.setState({ title: e.target.value })}
+                    />
+                    <input
+                        className="description"
+                        id= "noteInput"
+                        type= "text"
+                        value= {this.state.description}
+                        onChange={e => this.setState({ description: e.target.value })}
+                    />
+                </div>
                 <textarea 
+                    className="content"
                     id = "noteContent"
+                    value = {this.state.content}
                     onChange = {e => this.setState({ content: e.target.value })}
                 />
-                <button onClick={this.handleClick}>
+                <button className="button" onClick={this.handleClick}>
                     Save Note
                 </button>
-            </form>
+            </div>
         )
 
-
-        // return(
-            // <Card className={classes.root}>
-            //     <CardContent>
-            //         <input type="text" value="Title" name="noteTitle"/>
-            //         <textarea value="New Note" name="noteContent"/>
-            //     </CardContent>
-            //     <CardActions>
-            //         <button onClick={this.clickHandle}>
-            //             Save Note 
-            //         </button>
-            //     </CardActions>
-            // </Card>
-        // )
     }
 }
 

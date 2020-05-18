@@ -1,0 +1,24 @@
+.Note {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    display: flex;
+    margin-top: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+}

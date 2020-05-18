@@ -18,22 +18,32 @@ class App extends Component {
     })
   }
 
-  removeNote = thisNote => {
+  removeNote = index => {
     const updatedNotes = this.state.notes.filter(
-      note => note.title !== thisNote.title
+      (note, ind) => ind !== index
     );
+    console.log(updatedNotes)
     this.setState(prevState => {
       return { notes: updatedNotes };
     })
   }
 
+  editNote = (thisNote, index) => {
+    var newNotes = [...this.state.notes]
+    newNotes[index] = thisNote;
+    this.setState ({notes : newNotes}) ;
+  }
+
   render() {
     return (
       <div className="App">
+        <h1>Create a New Note: </h1>
         <NewNote addNote = {this.addNote} />
+        <h1>Your Current Notes: </h1>
         <NoteList 
           notes = {this.state.notes}
           removeNote = {this.removeNote}
+          editNote = {this.editNote}
         />
       </div>
     )

@@ -1,0 +1,28 @@
+.NewNote {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: -40px;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.button {
+    margin-left: 20px;
+}
+
+.content {
+    width: 300px;
+    height: 100px;
+}
