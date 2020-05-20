@@ -14,6 +14,10 @@ class NewNote extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    /*
+    Use arrow functions to avoid doing bind this from above.
+    handleClick = () => {return ();}
+    */
     handleClick() {
         const c = {
             title: this.state.title,
