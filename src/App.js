@@ -12,16 +12,22 @@ class App extends Component {
     }
   }
 
+  //Don't love the name "thisNote". "note" works instead.
   addNote = thisNote => {
     this.setState(prevState => {
       return { notes: [...prevState.notes, thisNote] };
     })
   }
 
+  /*
+  Not a huge fan of using index. I would prefer to pass in a note object as your argument
+  and then filter on a key or unique value. 
+  */
   removeNote = index => {
     const updatedNotes = this.state.notes.filter(
       (note, ind) => ind !== index
     );
+    //Never leave console.logs or extraneous comments in your final product
     console.log(updatedNotes)
     this.setState(prevState => {
       return { notes: updatedNotes };
@@ -33,7 +39,7 @@ class App extends Component {
     newNotes[index] = thisNote;
     this.setState ({notes : newNotes}) ;
   }
-
+//Good use of parent / child components here.
   render() {
     return (
       <div className="App">
