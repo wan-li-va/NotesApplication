@@ -2,30 +2,42 @@ import React, { Component } from 'react';
 import './App.css';
 import NewNote from "./NewNote.js";
 import NoteList from "./NoteList.js";
-
+import firebase from './firebase.js';
 
 class App extends Component {
   constructor(props) {
     super (props);
     this.state = {
-      notes: []
+      notes: [],
+      database: firebase.database().ref("notes"),
     }
   }
 
-  addNote = thisNote => {
-    this.setState(prevState => {
-      return { notes: [...prevState.notes, thisNote] };
+  componentDidMount = () => {
+    this.state.database.once("value", snapshot => {
+      if (snapshot && snapshot.exists()) {
+        let notes = snapshot.val();
+        this.setState({ notes: notes })
+      }
     })
   }
 
-  removeNote = index => {
-    const updatedNotes = this.state.notes.filter(
-      (note, ind) => ind !== index
-    );
-    console.log(updatedNotes)
+  addNote = note => {
     this.setState(prevState => {
-      return { notes: updatedNotes };
+      return { notes: [...prevState.notes, note] };
     })
+    this.state.database.set(this.state.notes);
+  }
+
+  removeNote = note => {
+    const updatedNotes = this.state.notes.filter(
+      curnote => curnote.index !== note.index
+    );
+    console.log(updatedNotes)   // remove console.log when done
+    this.setState(prevState => {
+      return ({ notes: updatedNotes });
+    })
+    this.state.database.child(note.index).remove();
   }
 
   editNote = (thisNote, index) => {
@@ -49,27 +61,5 @@ class App extends Component {
     )
   }
 }
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

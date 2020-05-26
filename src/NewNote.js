@@ -6,50 +6,54 @@ class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "Title",
-            description: "Description",
-            content: "Note"
+            title: "",
+            description: "",
+            content: "",
         };
-
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
-        const c = {
-            title: this.state.title,
-            description: this.state.description,
-            content: this.state.content,
-            time: Moment().calendar(),
-            key: Date.now()
+    handleClick = () => {
+        if (this.state.title !== "" || this.state.content !== "") {
+            const c = {
+                title: this.state.title,
+                description: this.state.description,
+                content: this.state.content,
+                time: Moment().calendar(),
+                key: Date.now(),
+                index: Date.now(),
+            }
+            this.props.addNote(c)
+            this.setState({ title: "", content: "", description: "" })
         }
-        this.props.addNote(c)
-        this.setState({ title : "Title", content : "Note", description : "Description" })
     }
 
     render() {
-        return(
+        return (
             <div className="NewNote">
                 <div className="heading">
+                    <label>Title: </label>
                     <input
                         className="title"
-                        id= "noteTitle"
-                        type = "text"
-                        value = {this.state.title}
+                        id="noteTitle"
+                        type="text"
+                        value={this.state.title}
                         onChange={e => this.setState({ title: e.target.value })}
                     />
+                    <label>Description: </label>
                     <input
                         className="description"
-                        id= "noteInput"
-                        type= "text"
-                        value= {this.state.description}
+                        id="noteInput"
+                        type="text"
+                        value={this.state.description}
                         onChange={e => this.setState({ description: e.target.value })}
                     />
                 </div>
-                <textarea 
+                <label>Note: </label>
+                <textarea
                     className="content"
-                    id = "noteContent"
-                    value = {this.state.content}
-                    onChange = {e => this.setState({ content: e.target.value })}
+                    id="noteContent"
+                    value={this.state.content}
+                    onChange={e => this.setState({ content: e.target.value })}
                 />
                 <button className="button" onClick={this.handleClick}>
                     Save Note

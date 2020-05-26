@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -9,6 +11,11 @@
 
 h1 {
   color: rgb(253, 131, 152);
+}
+
+.NoteList {
+display: flex;
+flex-direction: row;
 }
 
 @media (prefers-reduced-motion: no-preference) {

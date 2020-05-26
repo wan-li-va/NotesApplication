@@ -10,16 +10,16 @@ class NoteList extends Component {
     }
 
     render() {
-        console.log(this.props.notes)
-        var list = this.props.notes.map((note,index) => {
-            return(
-                //<li key={note.key}>
-                    <Note index={index} note={note} editNote={this.props.editNote} removeNote={this.props.removeNote}> </Note>
-                //</li>
+        var list = this.props.notes.map((note, index) => {
+            return (
+                <Note
+                    index={index} note={note} editNote={this.props.editNote} removeNote={this.props.removeNote}
+                    notes={this.props.notes}>
+                </Note>
             )
         })
         return (
-            <div>
+            <div className="NoteList">
                 {list}
             </div>
         )
