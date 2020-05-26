@@ -46,6 +46,7 @@ class Note extends Component {
                             <div>
                                 <p>Title: {this.state.title}</p>
                                 <p>Description: {this.state.description}</p>
+                                <p>Date: {this.props.note.time}</p>
                                 <p>Note: {this.state.content}</p>
                                 <button className="button" onClick={() => this.setState({ isEditing: true })}>
                                     Edit Note

@@ -20,7 +20,7 @@ class NewNote extends React.Component {
                 content: this.state.content,
                 time: Moment().calendar(),
                 key: Date.now(),
-                index: Date.now(), //this.props.notes.length,
+                index: this.props.notes.length,
             }
             this.props.addNote(c)
             this.setState({ title: "", content: "", description: "" })
@@ -39,7 +39,7 @@ class NewNote extends React.Component {
                         value={this.state.title}
                         onChange={e => this.setState({ title: e.target.value })}
                     />
-                    <label>Description: </label>
+                    <label className="descriptionHeader">Description: </label>
                     <input
                         className="description"
                         id="noteInput"
@@ -48,7 +48,7 @@ class NewNote extends React.Component {
                         onChange={e => this.setState({ description: e.target.value })}
                     />
                 </div>
-                <label>Note: </label>
+                <label className="noteHeader">Note: </label>
                 <textarea
                     className="content"
                     id="noteContent"

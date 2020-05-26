@@ -32,7 +32,7 @@ class App extends Component {
 
   removeNote = note => {
     const updatedNotes = this.state.notes.filter(
-      curnote => curnote.index !== note.index
+      curnote => curnote.key !== note.key
     );
     console.log(updatedNotes)   // remove console.log when done
     console.log(this.state.notes)
@@ -45,7 +45,8 @@ class App extends Component {
   editNote = (thisNote, index) => {
     var newNotes = [...this.state.notes]
     newNotes[index] = thisNote;
-    this.setState ({notes : newNotes}) ;
+    this.setState ({notes : newNotes});
+    this.state.database.set(newNotes);
   }
 
   render() {
