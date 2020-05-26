@@ -16,17 +16,18 @@ class App extends Component {
   componentDidMount = () => {
     this.state.database.once("value", snapshot => {
       if (snapshot && snapshot.exists()) {
-        let notes = snapshot.val();
+        let notes = Array.from(snapshot.val());
         this.setState({ notes: notes })
       }
     })
   }
 
   addNote = note => {
+    var newNotes = [...this.state.notes, note];
     this.setState(prevState => {
-      return { notes: [...prevState.notes, note] };
+      return { notes: newNotes }
     })
-    this.state.database.set(this.state.notes);
+    this.state.database.set(newNotes);
   }
 
   removeNote = note => {
@@ -50,7 +51,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Create a New Note: </h1>
-        <NewNote addNote = {this.addNote} />
+        <NewNote addNote = {this.addNote} notes={this.state.notes}/>
         <h1>Your Current Notes: </h1>
         <NoteList 
           notes = {this.state.notes}

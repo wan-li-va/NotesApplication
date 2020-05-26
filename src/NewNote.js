@@ -20,7 +20,7 @@ class NewNote extends React.Component {
                 content: this.state.content,
                 time: Moment().calendar(),
                 key: Date.now(),
-                index: Date.now(),
+                index: this.props.notes.length,
             }
             this.props.addNote(c)
             this.setState({ title: "", content: "", description: "" })
