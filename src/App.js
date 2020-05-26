@@ -13,14 +13,14 @@ class App extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.state.database.once("value", snapshot => {
-      if (snapshot && snapshot.exists()) {
-        let notes = Array.from(snapshot.val());
-        this.setState({ notes: notes })
-      }
-    })
-  }
+  // componentDidMount = () => {
+  //   this.state.database.once("value", snapshot => {
+  //     if (snapshot && snapshot.exists()) {
+  //       let notes = Array.from(snapshot.val());
+  //       this.setState({ notes: notes })
+  //     }
+  //   })
+  // }
 
   addNote = note => {
     var newNotes = [...this.state.notes, note];
@@ -35,6 +35,7 @@ class App extends Component {
       curnote => curnote.index !== note.index
     );
     console.log(updatedNotes)   // remove console.log when done
+    console.log(this.state.notes)
     this.setState(prevState => {
       return ({ notes: updatedNotes });
     })
